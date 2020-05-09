@@ -33,7 +33,7 @@ class consultaencuestaExport implements FromCollection,Responsable,ShouldQueue,W
     {
          return $index = \DB::table('encuesta')
                 ->join('empleados', 'empleados.id', '=', 'encuesta.empleados_id')
-                ->select('encuesta.created_at','encuesta.*', 'empleados.CEDULA', 'empleados.NOMBRE', 'empleados.APELLIDO','empleados.EMPRESA','empleados.CARGO','empleados.DIRECCION','empleados.TELEFONO','empleados.CODCC','empleados.NOMBRECOSTOS','empleados.FECNAC','empleados.SEXO')
+                ->select('encuesta.*', 'empleados.CEDULA', 'empleados.NOMBRE', 'empleados.APELLIDO','empleados.EMPRESA','empleados.CARGO','empleados.DIRECCION','empleados.TELEFONO','empleados.CODCC','empleados.NOMBRECOSTOS','empleados.FECNAC','empleados.SEXO')
                 ->where('encuesta.created_at','LIKE','%'.$this->fecha.'%')
                 ->get();
 
@@ -43,7 +43,6 @@ class consultaencuestaExport implements FromCollection,Responsable,ShouldQueue,W
        public function headings(): array
     {
         return [
-'Fecha Encuesta',
 'id',
 'id_empleado',
 '¿Sintomas de Covid19?',

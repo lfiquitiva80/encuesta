@@ -51,8 +51,14 @@ class EncuestaController extends Controller
 
         $cedula=$request->input('cedula');
 
-        if(!$empleados = empleados::where('cedula',$validatedData)->first()){return view('empleados.create'); 
-        $request->session()->flash('status', 'No existe la cédula!'); };
+
+        if(!$empleados = empleados::where('cedula',$validatedData)->first() ){
+
+            return view('empleados.create'); 
+            $request->session()->flash('status', 'No existe la cédula!'); };
+
+
+
          $edad = Carbon::createFromDate($empleados->FECNAC)->age; 
          $companeros= DB::table('empleados') ->where('CODCC', $empleados->CODCC) ->pluck('NOMBRE','CEDULA'); 
          $request->session()->flash('status', 'Ingreso correctamente, por favor dilingenciar la encuesta !');
@@ -170,10 +176,38 @@ class EncuestaController extends Controller
         $tipotrabajo2=$request->input('trabajo');
         $transportes=$request->input('transportes');
         $cedula=$request->input('cedula');
+        $hoy=Carbon::now()->format('Y-m-d');
 
-        $validatedData = $request->validate(['cedula' => 'required|max:255', ]); 
-        $cedula=$request->input('cedula'); 
-        if(!$empleados = empleados::where('cedula',$validatedData)->first()){return view('empleados.create'); $request->session()->flash('status', 'No existe la cédula!'); }; $edad = Carbon::createFromDate($empleados->FECNAC)->age; $companeros= DB::table('empleados') ->where('CODCC', $empleados->CODCC) ->pluck('NOMBRE','CEDULA'); $request->session()->flash('status', 'Ingreso correctamente, por favor dilingenciar la encuesta !');
+        $validatedData = $request->validate(['cedula' => 'required|max:255', ]);
+
+        $empleados=empleados::where('cedula',$validatedData)->first(); 
+
+        if (is_null($empleados)) {
+            return view('empleados.create');
+        }
+
+        $encuesta2 = encuesta::where('empleados_id',$empleados->ID)
+                    ->where('created_at','LIKE','%'.$hoy.'%')
+                    ->get();
+                    //dd($encuesta2->count());
+
+         $cedula=$request->input('cedula');             
+          
+        if (!$encuesta2->count()==0) {
+
+            $request->session()->flash('status', 'Hoy '.$hoy.' tiene un registro en la encuesta, por favor realizarla mañana!');
+
+            return view('welcome');
+            
+
+        }elseif(!$empleados = empleados::where('cedula',$validatedData)->first()){
+
+            return view('empleados.create'); $request->session()->flash('status', 'No existe la cédula!'); };
+         $edad = Carbon::createFromDate($empleados->FECNAC)->age; 
+         $companeros= DB::table('empleados') ->where('CODCC', $empleados->CODCC) ->pluck('NOMBRE','CEDULA'); $request->session()->flash('status', 'Ingreso correctamente, por favor dilingenciar la encuesta !');       
+
+       
+        
 
 
         return view('encuesta.tipo', compact('tipotrabajo','tipotrabajo2','transportes','empleados','edad','companeros','cedula'));

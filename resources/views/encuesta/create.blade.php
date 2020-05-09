@@ -5,7 +5,9 @@
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.js"></script>
     @include('sweet::alert')
-
+  @php
+                        $url= url('/');
+  @endphp
 
 <div class="container">
 <div class="row justify-content-center">
@@ -33,25 +35,44 @@
                       </div>
                       <div class="modal-body">
 
-                          (*) Cuenta con un <code>factor de riesgo.</code> Por favor contactarse con el área de seguridad y salud laboral (SSL), para dar continuidad al protocolo de atención ante factores de riesgo: 
+                          (*) Cuenta con <code>sintomas relacionados con el Covid19</code> Por favor contactarse con el área de seguridad y salud laboral (SSL), para dar continuidad al protocolo de atención ante factores de riesgo: 
                           <table class="table table-responsive table-hover">
                             <thead>
                               <tr>
-                                <th>Palmeras</th>
-                                <th>Duquesa</th>
+                                @if ($url=='http://encuesta.palmar.com.co')<th>Palmeras</th>@endif
+                                @if ($url=='http://encuesta.duquesa.com.co')<th>Duquesa</th>@endif
                               </tr>
                             </thead>
-                            <tbody>
+<tbody>
                               <tr>
                                 <td><lu>
-                                  <li>profesionalssl@palmar.com.co</li>
-                                  <li>jeferrhh@palmar.com.co </li>
+
+                                  @if ($url=='http://encuesta.palmar.com.co')<li>jeferrhh@palmar.com.co  320-9039327</li>@endif
+                                  
+                                  
+                                
                                 </lu></td>
 
-                                 <td><lu>
-                                  <li>coordinadorsst@duquesa.com.co</li>
-                                  <li>coordinadorsst@duquesa.com.co </li>
+                                 @if ($url=='http://encuesta.duquesa.com.co')<td><lu>
+                                  <li>gestionhumana@duquesa.com.co   310-7668004 </li>
+                                 
+                                </lu></td>@endif
+
+                              </tr>
+
+                                            <tr>
+                                <td><lu>
+
+                                 
+                                  @if ($url=='http://encuesta.palmar.com.co')<li>profesionalssl@palmar.com.co 312-2538826</li>@endif
+                                  
+                                  
                                 </lu></td>
+
+                                 @if ($url=='http://encuesta.duquesa.com.co')<td><lu>
+                                
+                                  <li>coordinadorsst@duquesa.com.co  311-2363745</li>
+                                </lu></td>@endif
 
                               </tr>
                             </tbody>
@@ -81,21 +102,40 @@
                           <table class="table table-responsive table-hover">
                             <thead>
                               <tr>
-                                <th>Palmeras</th>
-                                <th>Duquesa</th>
+                                @if ($url=='http://encuesta.palmar.com.co')<th>Palmeras</th>@endif
+                                @if ($url=='http://encuesta.duquesa.com.co')<th>Duquesa</th>@endif
                               </tr>
                             </thead>
                             <tbody>
                               <tr>
                                 <td><lu>
-                                  <li>profesionalssl@palmar.com.co</li>
-                                  <li>jeferrhh@palmar.com.co </li>
+
+                                  @if ($url=='http://encuesta.palmar.com.co')<li>jeferrhh@palmar.com.co  320-9039327</li>@endif
+                                  
+                                  
+                                
                                 </lu></td>
 
-                                 <td><lu>
-                                  <li>coordinadorsst@duquesa.com.co</li>
-                                  <li>coordinadorsst@duquesa.com.co </li>
+                                 @if ($url=='http://encuesta.duquesa.com.co')<td><lu>
+                                  <li>gestionhumana@duquesa.com.co   310-7668004 </li>
+                                 
+                                </lu></td>@endif
+
+                              </tr>
+
+                                            <tr>
+                                <td><lu>
+
+                                 
+                                  @if($url=='http://encuesta.palmar.com.co')<li>profesionalssl@palmar.com.co 312-2538826</li>@endif
+                                  
+                                
                                 </lu></td>
+
+                                @if ($url=='http://encuesta.duquesa.com.co') <td><lu>
+                                
+                                  <li>coordinadorsst@duquesa.com.co  311-2363745</li>
+                                </lu></td>@endif
 
                               </tr>
                             </tbody>
@@ -110,6 +150,68 @@
                   </div>
                 </div>               
                
+
+
+                                <div class="modal fade" id="modal-riesgo">
+                  <div class="modal-dialog modal-lg">
+                    <div class="modal-content bg-white">
+                      <div class="modal-header">
+                        <h4 class="modal-title">Seguir con el protocolo de la empresa</h4>
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                        
+                      </div>
+                      <div class="modal-body">
+
+                          (*) Cuenta con un <code>factor de riesgo.</code> Por favor contactarse con el área de seguridad y salud laboral (SSL), para dar continuidad al protocolo de atención ante factores de riesgo: 
+                          <table class="table table-responsive table-hover">
+                            <thead>
+                              <tr>
+                                @if ($url=='http://encuesta.palmar.com.co')<th>Palmeras</th>@endif
+                                @if ($url=='http://encuesta.duquesa.com.co')<th>Duquesa</th>@endif
+                              </tr>
+                            </thead>
+                            <tbody>
+                              <tr>
+                                <td><lu>
+
+                                  @if($url=='http://encuesta.palmar.com.co')<li>jeferrhh@palmar.com.co  320-9039327</li>@endif
+                                                                   
+                                
+                                </lu></td>
+
+                                 @if ($url=='http://encuesta.duquesa.com.co')<td><lu>
+                                  <li>gestionhumana@duquesa.com.co   310-7668004 </li>
+                                 
+                                </lu></td>@endif
+
+                              </tr>
+
+                                            <tr>
+                                <td><lu>
+
+                                 
+                                  @if($url=='http://encuesta.palmar.com.co')<li>profesionalssl@palmar.com.co 312-2538826</li>@endif
+                                  
+                                 
+                                </lu></td>
+
+                                 @if ($url=='http://encuesta.duquesa.com.co')<td><lu>
+                                
+                                  <li>coordinadorsst@duquesa.com.co  311-2363745</li>
+                                </lu></td>@endif
+
+                              </tr>
+                            </tbody>
+                          </table>
+
+
+                      </div>
+                      <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        </div>
+                    </div>
+                  </div>
+                </div> 
 
  
  <table class="table table-condensed table-hover" id="infopersonal">
@@ -712,7 +814,7 @@ var p13 =$('input:radio[name=pregunta13]').click(function(event) {if ($(this).va
       
       if (p1==1 || p2 == 1 || p13==1) {
 
-        $('#modal-dq').modal();
+        $('#modal-riesgo').modal();
 
       } else {}
 
@@ -735,14 +837,14 @@ var p13 =$('input:radio[name=pregunta13]').click(function(event) {if ($(this).va
       
 
    //alert('hola');
- if (p4==1 || p5 == 1 || p6==1 || p7==1 || p8==1 || p9==1 || p10==1 || p11==1 || p12==1) {
+ if (p3==1 || p4==1 || p5 == 1 || p6==1 || p7==1 || p8==1 || p9==1 || p10==1 || p11==1 || p12==1) {
        
        
         $('#modal-dq').modal();
       
         
 
-    } else if (p14==1 || p15 == 1) {
+    } else if (p14==1 && p15 == 1) {
         
       
         $('#modal-covid').modal();

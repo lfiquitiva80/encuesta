@@ -79,6 +79,10 @@
 	{!! Form::text('EPS', null,['class' => 'form-control', 'placeholder' => 'Digite la EPS','name'=>'EPS', 'required']) !!}
 	</div>
 
+	<div class="form-group">
+	<label for="id">Persona que tiene contacto de la empresa: </label>
+	{!! Form::text('contactoempresa', null,['class' => 'form-control', 'placeholder' => 'Digite la persona que va a tener el contacto dentro de la empresa','name'=>'contactoempresa', 'required']) !!}
+	</div>
 
    
     <center><button type="submit" class="btn btn-block btn-primary" >Enviar</button>

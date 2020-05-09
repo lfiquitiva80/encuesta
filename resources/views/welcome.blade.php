@@ -27,7 +27,7 @@
                         <div class="alert alert-primary" role="alert">
                             {{ session('status') }}
                         </div>
-                    @endif
+ @endif
 
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.js"></script>
@@ -35,7 +35,18 @@
 
                 <div class="card-body">
 
-                       <center><img src="{{asset('img/Duquesa.png')}}" alt="" > <img src="{{asset('img/palmar.jpg')}}" width="50%" height="50%" alt="" class="glyphicon-align-left"> </center>
+                    @php
+                        $url= url('/');
+                    @endphp
+                        
+                        @if ($url=='http://encuesta.duquesa.com.co')
+                            <center><img src="{{asset('img/Duquesa.png')}}" alt="" ></center><br><br>
+                        @else
+                            
+                            <center><img src="{{asset('img/palmar.jpg')}}" width="50%" height="50%" alt="" class="glyphicon-align-left"> </center>
+
+                        @endif
+                      
                 {!! Form::open(['route' => 'tipotrabajo', 'method'=>'GET','id'=>'fom1']) !!}
 
                         <div class="form-group row">
@@ -55,7 +66,17 @@
                                   <input type="checkbox" id="remember" required>
                                   <label for="remember">
                                     He leído y acepto los términos y condiciones de uso de la información Política de Protección Base de Datos<p>
-                                   <img src="{{asset('img/pdf.svg')}}" alt="Política" width="8%" height="8%"><a href="{{asset('pdf/GAD-PO-01 Politica de Proteccion Base de Datos V2.pdf')}}" title="">   Política de Protección Base de Datos.pdf</a>  
+
+                                    @if ($url=='http://encuesta.duquesa.com.co')
+
+                                       <img src="{{asset('img/pdf.svg')}}" alt="Política" width="8%" height="8%"><a href="{{asset('pdf/Politica de Proteccion Base de Datos DQ.pdf')}}" title="">  Política de Protección Base de Datos Duquesa.pdf</a>      
+                                  
+                                   @else
+
+                                     <img src="{{asset('img/pdf.svg')}}" alt="Política" width="8%" height="8%"><a href="{{asset('pdf/GAD-PO-01 Politica de Proteccion Base de Datos V2.pdf')}}" title="">   Política de Protección Base de Datos Palmeras.pdf</a>
+
+
+                                   @endif 
                                   </label>
                                 </div>
                                 

@@ -7,6 +7,7 @@ use App\Exports\empleadosExport;
 use App\Exports\consintomasExport;
 use App\Exports\sinsintomasExport;
 use App\Exports\conCovidExport;
+use App\Exports\faltanReportarfechaExport;
 use App\Exports\consultaencuestaExport;
 use App\Exports\faltanReportarExport;
 use Maatwebsite\Excel\Facades\Excel;
@@ -52,6 +53,17 @@ class excelController extends Controller
 
       return new consultaencuestaExport($request->fecha);
     }
+
+
+  public function faltanReportarFecha(Request $request){
+
+        //dd($request->fecha);
+
+      return new faltanreportarfechaExport($request->fecha);
+    }
+
+
+
 }
 
 

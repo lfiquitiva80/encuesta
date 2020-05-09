@@ -56,6 +56,7 @@ class SendEmails extends Command
                 ->get();
 
         \Mail::to('ingenierodesarrollo@duquesa.com.co')->send(new sinreportar($index));
+        \Mail::to('ingenierodesarrollo@duquesa.com.co')->send(new encuestacorreo());
         
             
 
