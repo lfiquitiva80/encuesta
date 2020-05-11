@@ -71,3 +71,4 @@ Route::get('concovid/export/', 'excelController@concovid');
 Route::get('faltanReportar/export/', 'excelController@faltanReportar');
 Route::get('consultaencuesta/export/', 'excelController@consultaencuesta')->name('consultaencuesta');
 Route::get('faltanReportarfecha/export/', 'excelController@faltanReportarfecha')->name('faltanReportarfecha');
+Route::get('sinsintomasfecha/export/', 'excelController@sinsintomasFecha')->name('sinsintomasFecha');

@@ -25,7 +25,7 @@
             </thead>
             <tbody>
 
-              <tr>
+{{--               <tr>
                 <td>
                   
 
@@ -44,7 +44,7 @@
         <button type="submit" class="btn btn-success"><i class="fa fa-file-excel-o" aria-hidden="true"></i> Consultar</button>
         {!! Form::close() !!}
                 </td>
-              </tr>
+              </tr> --}}
               <tr>
                 <td> <ul class="list-group">
             <li class="list-group-item"><a href="{{ url('/encuestas/export')}}"><svg class="bi bi-file-spreadsheet" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
@@ -70,7 +70,7 @@
               <path fill-rule="evenodd" d="M5 14V6h1v8H5zm4 0V6h1v8H9z" clip-rule="evenodd"/>
             </svg> Excel de Encuestas sin Sintomas</a></li></td>
                 <td>
-                         {!! Form::open(['route' => 'consultaencuesta', 'method'=>'GET', 'Class'=>'form-inline']) !!}
+                         {!! Form::open(['route' => 'sinsintomasFecha', 'method'=>'GET', 'Class'=>'form-inline']) !!}
             {!! Form::date('fecha', \Illuminate\Support\Carbon::now(), ['class' => 'form-control','name'=>'fecha','required']) !!}
         <button type="submit" class="btn btn-success"><i class="fa fa-file-excel-o" aria-hidden="true"></i> Consultar</button>
         {!! Form::close() !!}
@@ -189,6 +189,7 @@
           <th>REGISTROS</th>
           <th>EMPRESA</th>
           <th>CUMPLIMIENTO</th>
+          <th>REPORTE FALTANTES</th>
         </tr>
       </thead>
       <tbody>
@@ -202,6 +203,11 @@
             echo $english_format_number = number_format($var1, 2, '.', '')."%";
 
            @endphp   </td>
+           <td>  {!! Form::open(['route' => 'faltanReportarfecha', 'method'=>'GET', 'Class'=>'form-inline']) !!}
+
+       {!! Form::hidden('fecha', $row->fecha, ['class' => 'form-control','name'=>'fecha']) !!}    
+        <button type="submit" class="btn btn-success"><i class="fa fa-file-excel-o" aria-hidden="true" title="Empleados que no reportaron"></title> </i> Excel</button>
+        {!! Form::close() !!}</td>
         </tr>
 
         @endforeach
@@ -218,7 +224,168 @@
 
       </div>  
     </div>
-  </div>
+    <div class="col-md-4">
+      <div class="card">
+        <div class="card-header">Datos importantes</div>
+
+        <div class="card-body">
+
+
+          <div class="col-lg-12 col-12">
+            <!-- small box -->
+            <div class="small-box bg-info">
+              <div class="inner">
+                <h3>@php
+                 $hoy=\Carbon\Carbon::now()->format('Y-m-d'); 
+                 $sintomas = \App\encuesta::where('Covid19','Si' )->count(); echo $sintomas; @endphp</h3>
+
+                <p>¿Sintomas de Covid19?</p>
+              </div>
+              <div class="icon">
+                <i class="ion ion-bag"></i>
+              </div>
+              
+            </div>
+          </div>
+          <p>
+          <!-- ./col -->
+          <div class="col-lg-12 col-12">
+            <!-- small box -->
+            <div class="small-box bg-success">
+              <div class="inner">
+                <h3>@php $sintomas = \App\encuesta::where('created_at','LIKE','%'.$hoy.'%')->get(); echo $sintomas->count(); @endphp<sup style="font-size: 20px"></sup></h3>
+
+                <p>Total Encuestas HOY</p>
+              </div>
+              <div class="icon">
+                <i class="ion ion-stats-bars"></i>
+              </div>
+              
+            </div>
+          </div>
+
+          <p>
+          <!-- ./col -->
+          <div class="col-lg-12 col-12">
+            <!-- small box -->
+            <div class="small-box bg-warning">
+              <div class="inner">
+                <h3>@php $empleados = \App\empleados::where('Diligenciar','1')->get(); echo $empleados->count(); @endphp</h3>
+
+                <p>Empleados que pueden realizar la encuesta</p>
+              </div>
+              <div class="icon">
+                <i class="ion ion-person-add"></i>
+              </div>
+              
+            </div>
+          </div>
+
+          <p>
+          <!-- ./col -->
+          <div class="col-lg-12 col-12">
+            <!-- small box -->
+            <div class="small-box bg-danger">
+              <div class="inner">
+                <h3>@php $sintomas = \App\encuesta::where('pregunta14','1')->get(); echo $sintomas->count(); @endphp</h3>
+
+                <p>¿Cuenta con prueba para COVID-19? </p>
+              </div>
+              <div class="icon">
+                <i class="ion ion-pie-graph"></i>
+              </div>
+              
+            </div>
+          </div>
+          <!-- ./col -->
+        </div>
+
+
+    </div>
+
+    <p>
+
+    <div class="card">
+        <div class="card-header">Listado de Empleados con Sintomas Covid</div>
+
+        <div class="card-body">
+
+        @php  
+
+        $index = \DB::table('encuesta')
+            ->join('empleados', 'empleados.id', '=', 'encuesta.empleados_id')
+                ->where('Covid19','Si' )
+                ->select('empleados.CEDULA', 'empleados.NOMBRE', 'empleados.APELLIDO','empleados.EMPRESA','empleados.CARGO','empleados.DIRECCION','empleados.TELEFONO','empleados.CODCC','empleados.NOMBRECOSTOS','empleados.FECNAC','empleados.SEXO')
+            ->get();
+
+        @endphp
+
+        @foreach ($index as $row)
+        
+        <lu>
+          <li>{{$row->CEDULA}} || {{$row->NOMBRE}} || {{$row->APELLIDO}} || {{$row->CARGO}}</li>
+        </lu>
+        
+
+        @endforeach
+      
+    
+
+          <!-- ./col -->
+        </div>
+
+
+    </div>
+
+    <p/>
+       <div class="card">
+        <div class="card-header">Listado de Empleados con Factores de Riesgo</div>
+
+        <div class="card-body">
+
+        @php  
+
+        $index = \DB::table('encuesta')
+            ->join('empleados', 'empleados.id', '=', 'encuesta.empleados_id')
+                ->orWhere('pregunta1','1' )
+                ->orWhere('pregunta1','1' )
+                ->orWhere('pregunta13','1' )
+                ->select('empleados.CEDULA', 'empleados.NOMBRE', 'empleados.APELLIDO','empleados.EMPRESA','empleados.CARGO','empleados.DIRECCION','empleados.TELEFONO','empleados.CODCC','empleados.NOMBRECOSTOS','empleados.FECNAC','empleados.SEXO')
+            ->get();
+
+        @endphp
+
+        @foreach ($index as $row)
+        
+        <lu>
+          <li>{{$row->CEDULA}} || {{$row->NOMBRE}} || {{$row->APELLIDO}} || {{$row->CARGO}}</li>
+        </lu>
+        
+
+        @endforeach
+      
+    
+
+          <!-- ./col -->
+        </div>
+
+
+    </div>
+
+
+
+    </div><!-- Finaliza el card -->
+
+
+
+
+
+    </div>
+
+ 
+
+    
+
 </div>
 
 

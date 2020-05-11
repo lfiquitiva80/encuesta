@@ -36,12 +36,22 @@ class faltanReportarfechaExport implements FromCollection,ShouldQueue,Responsabl
     public function collection()
     {
 
-         return $index = \DB::table('empleados')
-                
-                ->leftjoin('empleados', 'encuesta.empleados_id', '=', 'empleados.ID')
-                ->where('empleados.Diligenciar','1' )    
-                ->where('encuesta.created_at','LIKE','%'.$this->fecha.'%')  
-                ->get();    
+        $empleados = \DB::table('empleados')
+                    ->leftjoin('encuesta','encuesta.empleados_id','=','empleados.ID')
+                    //->select('empleados.ID')
+                    ->where('empleados.Diligenciar','1' )
+                    ->where('encuesta.created_at','LIKE','%'.$this->fecha.'%')  
+                    ->pluck('empleados.ID');
+                    
+
+              //dd($empleados);      
+
+         return $index = \DB::table('empleados')                
+                        ->where('Diligenciar','1' )    
+                        ->whereNotIn('ID', $empleados)  
+                ->get();
+
+               
 
                 
         		
@@ -53,16 +63,27 @@ class faltanReportarfechaExport implements FromCollection,ShouldQueue,Responsabl
     {
         return [
         
-        'CEDULA',
-        'NOMBRE',
-        'APELLIDO',
-        'EMPRESA',
-        'CARGO',
-        'DIRECCION',
-        'TELEFONO',
-        'CODCC',
-        'NOMBRECOSTOS'
-        
+                    'ID',
+                    'CEDULA',
+                    'NOMBRE',
+                    'APELLIDO',
+                    'CARGO',
+                    'DIRECCION',
+                    'TELEFONO',
+                    'CODCC',
+                    'NOMBRECOSTOS',
+                    'FECNAC',
+                    'SEXO',
+                    'EMPRESA',
+                    'EMAIL',
+                    'EPS',
+                    'ARL',
+                    'ACTIVO',
+                    'DILIGENCIAR',
+                    'CONTACTO EMPRESA',
+                    'FECHA ACTUALIZACIÓN',
+                    'FECHA DE CREACIÓN'
+
             
         ];
     }

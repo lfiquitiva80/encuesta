@@ -6,6 +6,7 @@ use App\Exports\encuestaExport;
 use App\Exports\empleadosExport;
 use App\Exports\consintomasExport;
 use App\Exports\sinsintomasExport;
+use App\Exports\sinsintomasfechaExport;
 use App\Exports\conCovidExport;
 use App\Exports\faltanReportarfechaExport;
 use App\Exports\consultaencuestaExport;
@@ -61,6 +62,15 @@ class excelController extends Controller
 
       return new faltanreportarfechaExport($request->fecha);
     }
+
+
+    public function sinsintomasFecha(Request $request){
+
+        //dd($request->fecha);
+
+      return new sinsintomasfechaExport($request->fecha);
+    }
+  
 
 
 

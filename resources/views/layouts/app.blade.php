@@ -17,10 +17,11 @@
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
 
-
+<script src="https://unpkg.com/ionicons@5.0.0/dist/ionicons.js"></script>
     <script src="{{ asset('js/app.js') }}"></script>
     <script src="{{ asset('js/select2.js') }}"></script> 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.js"></script>
+    
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
