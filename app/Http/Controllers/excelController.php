@@ -5,13 +5,17 @@ namespace App\Http\Controllers;
 use App\Exports\encuestaExport;
 use App\Exports\empleadosExport;
 use App\Exports\consintomasExport;
+use App\Exports\consintomasfechaExport;
+use App\Exports\concovidfechaExport;
 use App\Exports\sinsintomasExport;
 use App\Exports\sinsintomasfechaExport;
 use App\Exports\conCovidExport;
 use App\Exports\faltanReportarfechaExport;
 use App\Exports\consultaencuestaExport;
 use App\Exports\faltanReportarExport;
+use App\Exports\factoresriesgosfechaExport;
 use Maatwebsite\Excel\Facades\Excel;
+
 
 use Illuminate\Http\Request;
 
@@ -72,6 +76,35 @@ class excelController extends Controller
     }
   
 
+    public function concovidFecha(Request $request){
+
+        //dd($request->fecha);
+
+      return new concovidfechaExport($request->fecha);
+    }
+
+
+        public function consintomasFecha(Request $request){
+
+        //dd($request->fecha);
+
+      return new consintomasfechaExport($request->fecha);
+    }
+
+
+       public function factoresriesgos(confactoresriesgosExport $confactoresriesgosExport)
+    {
+      return $confactoresriesgosExport;
+    }
+
+
+
+        public function factoresriesgosFecha(Request $request){
+
+        //dd($request->fecha);
+
+      return new factoresriesgosfechaExport($request->fecha);
+    }
 
 
 }

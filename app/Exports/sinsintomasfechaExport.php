@@ -19,7 +19,7 @@ class sinsintomasfechaExport implements FromCollection,ShouldQueue,Responsable,W
 
 
 
-    private $fileName = 'faltanReportarfecha.xlsx';
+    private $fileName = 'sinsintomasfechaExport.xlsx';
 
 
       public function __construct($fecha) 
@@ -54,7 +54,7 @@ class sinsintomasfechaExport implements FromCollection,ShouldQueue,Responsable,W
     {
         return [
         
-                    'id',
+                    'id',0
                     'id_empleado',
                     '¿Sintomas de Covid19?',
                     '1. ¿Ha viajado en los últimos quince días? ',

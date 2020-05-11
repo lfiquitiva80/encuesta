@@ -51,7 +51,7 @@
               <path fill-rule="evenodd" d="M4 1h8a2 2 0 012 2v10a2 2 0 01-2 2H4a2 2 0 01-2-2V3a2 2 0 012-2zm0 1a1 1 0 00-1 1v10a1 1 0 001 1h8a1 1 0 001-1V3a1 1 0 00-1-1H4z" clip-rule="evenodd"/>
               <path fill-rule="evenodd" d="M13 6H3V5h10v1zm0 3H3V8h10v1zm0 3H3v-1h10v1z" clip-rule="evenodd"/>
               <path fill-rule="evenodd" d="M5 14V6h1v8H5zm4 0V6h1v8H9z" clip-rule="evenodd"/>
-            </svg> Excel de Encuestas</a></li></td>
+            </svg> Excel Total de Encuestas</a></li></td>
             <td>
               
                {!! Form::open(['route' => 'consultaencuesta', 'method'=>'GET', 'Class'=>'form-inline']) !!}
@@ -68,7 +68,7 @@
               <path fill-rule="evenodd" d="M4 1h8a2 2 0 012 2v10a2 2 0 01-2 2H4a2 2 0 01-2-2V3a2 2 0 012-2zm0 1a1 1 0 00-1 1v10a1 1 0 001 1h8a1 1 0 001-1V3a1 1 0 00-1-1H4z" clip-rule="evenodd"/>
               <path fill-rule="evenodd" d="M13 6H3V5h10v1zm0 3H3V8h10v1zm0 3H3v-1h10v1z" clip-rule="evenodd"/>
               <path fill-rule="evenodd" d="M5 14V6h1v8H5zm4 0V6h1v8H9z" clip-rule="evenodd"/>
-            </svg> Excel de Encuestas sin Sintomas</a></li></td>
+            </svg> Excel Total de Encuestas sin Sintomas</a></li></td>
                 <td>
                          {!! Form::open(['route' => 'sinsintomasFecha', 'method'=>'GET', 'Class'=>'form-inline']) !!}
             {!! Form::date('fecha', \Illuminate\Support\Carbon::now(), ['class' => 'form-control','name'=>'fecha','required']) !!}
@@ -86,12 +86,12 @@
               <path fill-rule="evenodd" d="M4 1h8a2 2 0 012 2v10a2 2 0 01-2 2H4a2 2 0 01-2-2V3a2 2 0 012-2zm0 1a1 1 0 00-1 1v10a1 1 0 001 1h8a1 1 0 001-1V3a1 1 0 00-1-1H4z" clip-rule="evenodd"/>
               <path fill-rule="evenodd" d="M13 6H3V5h10v1zm0 3H3V8h10v1zm0 3H3v-1h10v1z" clip-rule="evenodd"/>
               <path fill-rule="evenodd" d="M5 14V6h1v8H5zm4 0V6h1v8H9z" clip-rule="evenodd"/>
-            </svg> Excel de Encuestas con Covid Confirmado</a></li>
+            </svg> Excel Total de Encuestas con Covid Confirmado</a></li>
 
                 </td>
                 <td>
                   
-                                  {!! Form::open(['route' => 'consultaencuesta', 'method'=>'GET', 'Class'=>'form-inline']) !!}
+                                  {!! Form::open(['route' => 'concovidFecha', 'method'=>'GET', 'Class'=>'form-inline']) !!}
             {!! Form::date('fecha', \Illuminate\Support\Carbon::now(), ['class' => 'form-control','name'=>'fecha','required']) !!}
         <button type="submit" class="btn btn-success"><i class="fa fa-file-excel-o" aria-hidden="true"></i> Consultar</button>
         {!! Form::close() !!}
@@ -108,19 +108,39 @@
               <path fill-rule="evenodd" d="M4 1h8a2 2 0 012 2v10a2 2 0 01-2 2H4a2 2 0 01-2-2V3a2 2 0 012-2zm0 1a1 1 0 00-1 1v10a1 1 0 001 1h8a1 1 0 001-1V3a1 1 0 00-1-1H4z" clip-rule="evenodd"/>
               <path fill-rule="evenodd" d="M13 6H3V5h10v1zm0 3H3V8h10v1zm0 3H3v-1h10v1z" clip-rule="evenodd"/>
               <path fill-rule="evenodd" d="M5 14V6h1v8H5zm4 0V6h1v8H9z" clip-rule="evenodd"/>
-            </svg> Excel de Encuestas Con Sintomas</a></li>
+            </svg> Excel Total de Encuestas Con Sintomas</a></li>
 
                 </td>
                 <td>
                   
-                                     {!! Form::open(['route' => 'consultaencuesta', 'method'=>'GET', 'Class'=>'form-inline']) !!}
+                                     {!! Form::open(['route' => 'consintomasFecha', 'method'=>'GET', 'Class'=>'form-inline']) !!}
             {!! Form::date('fecha', \Illuminate\Support\Carbon::now(), ['class' => 'form-control','name'=>'fecha','required']) !!}
         <button type="submit" class="btn btn-success"><i class="fa fa-file-excel-o" aria-hidden="true"></i> Consultar</button>
         {!! Form::close() !!}
                 </td>
               </tr>
 
-              
+  
+
+{{-- Excel con Factores de Riesgos --}}
+            <tr>
+              <td>
+                
+                     <li class="list-group-item"><a href="{{ url('factoresriesgos/export/')}}"><svg class="bi bi-file-spreadsheet" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+              <path fill-rule="evenodd" d="M4 1h8a2 2 0 012 2v10a2 2 0 01-2 2H4a2 2 0 01-2-2V3a2 2 0 012-2zm0 1a1 1 0 00-1 1v10a1 1 0 001 1h8a1 1 0 001-1V3a1 1 0 00-1-1H4z" clip-rule="evenodd"/>
+              <path fill-rule="evenodd" d="M13 6H3V5h10v1zm0 3H3V8h10v1zm0 3H3v-1h10v1z" clip-rule="evenodd"/>
+              <path fill-rule="evenodd" d="M5 14V6h1v8H5zm4 0V6h1v8H9z" clip-rule="evenodd"/>
+            </svg> Excel Total Factores de Riesgos</a></li>
+              </td>
+              <td>
+                
+                                                       {!! Form::open(['route' => 'factoresriesgosFecha', 'method'=>'GET', 'Class'=>'form-inline']) !!}
+            {!! Form::date('fecha', \Illuminate\Support\Carbon::now(), ['class' => 'form-control','name'=>'fecha','required']) !!}
+        <button type="submit" class="btn btn-success"><i class="fa fa-file-excel-o" aria-hidden="true"></i> Consultar</button>
+        {!! Form::close() !!}
+              </td>
+            </tr>
+
             
             <tr>
               <td>
@@ -129,14 +149,14 @@
               <path fill-rule="evenodd" d="M4 1h8a2 2 0 012 2v10a2 2 0 01-2 2H4a2 2 0 01-2-2V3a2 2 0 012-2zm0 1a1 1 0 00-1 1v10a1 1 0 001 1h8a1 1 0 001-1V3a1 1 0 00-1-1H4z" clip-rule="evenodd"/>
               <path fill-rule="evenodd" d="M13 6H3V5h10v1zm0 3H3V8h10v1zm0 3H3v-1h10v1z" clip-rule="evenodd"/>
               <path fill-rule="evenodd" d="M5 14V6h1v8H5zm4 0V6h1v8H9z" clip-rule="evenodd"/>
-            </svg> Excel de Trabajadores</a></li>
+            </svg> Excel Total de Trabajadores</a></li>
               </td>
               <td>
-                
+           {{--      
                                                        {!! Form::open(['route' => 'consultaencuesta', 'method'=>'GET', 'Class'=>'form-inline']) !!}
             {!! Form::date('fecha', \Illuminate\Support\Carbon::now(), ['class' => 'form-control','name'=>'fecha','required']) !!}
         <button type="submit" class="btn btn-success"><i class="fa fa-file-excel-o" aria-hidden="true"></i> Consultar</button>
-        {!! Form::close() !!}
+        {!! Form::close() !!} --}}
               </td>
             </tr>
 

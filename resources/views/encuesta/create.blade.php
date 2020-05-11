@@ -342,6 +342,7 @@
                               'Niet@' =>'Niet@',
                               'Herman@' =>'Herman@',
                               'Cuñad@' =>'Cuñad@',
+                              'Conyugue' =>'Conyugue',
                               'Ti@' =>'Ti@',
                               'Sobrin@' =>'Sobrin@'
                               
