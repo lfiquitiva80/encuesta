@@ -13,7 +13,7 @@
 <div class="row justify-content-center">
     <div class="col-md-8">
         <div class="card">
-            <div class="card-header"><a href="{{ url('/')}}" class="btn btn-primary">Digitar otra cédula?</a>@auth <a href="/home" class="btn btn-danger"> Reportes Administrador</a>
+            <div class="card-header"><a href="{{ url('/')}}" class="btn btn-primary">Digitar otra cédula?</a>@auth <a href="/home" class="btn btn-danger"> Reportes Administrador</a>  
 @endauth</div>
 
             <div class="card-body">
@@ -362,7 +362,7 @@
 <div id="factoresriesgo">
 
 
-  
+  <input type="button" id="refrescar" value="Regresar" class="btn btn-danger"><p/>
   <div class="alert alert-info">
 <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
 <strong></strong> <label for="id">Mencione si presenta o presentó en las ultimas 72 horas alguna de las siguientes sintomas: (*) </label>
@@ -699,6 +699,7 @@
         </div>
 
    <button type="button" class="btn btn-large btn-block btn-primary" id="Sig2">Siguiente</button>
+
 <center><button type="submit" class="btn btn-large btn-block btn-danger" id="enviar1">Enviar</button>
 <center><button type="submit" class="btn btn-large btn-danger" id="enviar2" >Por favor click para confirmar?</button>
 {!! Form::close() !!}
@@ -735,6 +736,13 @@
         $('#enviar2').hide();
         $('#preguntaprincipal').hide();
         $('.tipo').show();
+
+
+        $("#refrescar").click(function(){
+      //Actualizamos la página
+      location.reload();
+      });
+      
      
      // tres primeras preguntas  
 var p1 =$('input:radio[name=pregunta1]').click(function(event) {if ($(this).val()==1) {p1=1; } else {p1=0; } ; });
@@ -760,19 +768,21 @@ var p13 =$('input:radio[name=pregunta13]').click(function(event) {if ($(this).va
 
   $('input:radio[name=pregunta1]').click(function () {var resp1=$(this).val(); if (resp1==1) {$('#pregunta1_resp').show(); } else {$('#pregunta1_resp').hide(); } }); 
   $('input:radio[name=pregunta2]').click(function () {var resp2=$(this).val(); if (resp2==1) {$('#pregunta2_resp').show(); } else {$('#pregunta2_resp').hide(); } });
-  $('input:radio[name=pregunta3]').click(function () {var resp3=$(this).val(); console.log(resp3); if (resp3==1) {$('#pregunta3_resp').show(); } else {$('#pregunta3_resp').hide(); } });
-  $('input:radio[name=pregunta4]').click(function () {var resp4=$(this).val(); if (resp4==1) {$('#pregunta4_resp').show(); } else {$('#pregunta4_resp').hide(); } });
-  $('input:radio[name=pregunta5]').click(function () {var resp5=$(this).val(); if (resp5==1) {$('#pregunta5_resp').show(); } else {$('#pregunta5_resp').hide(); } });
-  $('input:radio[name=pregunta6]').click(function () {var resp6=$(this).val(); if (resp6==1) {$('#pregunta6_resp').show(); } else {$('#pregunta6_resp').hide(); } });
-  $('input:radio[name=pregunta7]').click(function () {var resp7=$(this).val(); if (resp7==1) {$('#pregunta7_resp').show(); } else {$('#pregunta7_resp').hide(); } });
-  $('input:radio[name=pregunta8]').click(function () {var resp8=$(this).val(); if (resp8==1) {$('#pregunta8_resp').show(); } else {$('#pregunta8_resp').hide(); } });
-  $('input:radio[name=pregunta9]').click(function () {var resp9=$(this).val(); if (resp9==1) {$('#pregunta9_resp').show(); } else {$('#pregunta9_resp').hide(); } });
-  $('input:radio[name=pregunta10]').click(function () {var resp10=$(this).val(); if (resp10==1) {$('#pregunta10_resp').show(); } else {$('#pregunta10_resp').hide(); } });
-  $('input:radio[name=pregunta11]').click(function () {var resp11=$(this).val(); if (resp11==1) {$('#pregunta11_resp').show(); } else {$('#pregunta11_resp').hide(); } });
-  $('input:radio[name=pregunta12]').click(function () {var resp12=$(this).val(); if (resp12==1) {$('#pregunta12_resp').show(); } else {$('#pregunta12_resp').hide(); } });
+  
+  $('input:radio[name=pregunta3]').click(function () {var resp3=$(this).val(); console.log(resp3); if (resp3==1) {$('#pregunta3_resp').show(); $('#Sig2').prop('disabled', false);} else {$('#pregunta3_resp').hide(); $('#Sig2').prop('disabled', true); } });
+
+  $('input:radio[name=pregunta4]').click(function () {var resp4=$(this).val(); $('#Sig2').prop('disabled', false);if (resp4==1) {$('#pregunta4_resp').show(); } else {$('#pregunta4_resp').hide(); $('#Sig2').prop('disabled', true); } });
+  $('input:radio[name=pregunta5]').click(function () {var resp5=$(this).val(); $('#Sig2').prop('disabled', false); if (resp5==1) {$('#pregunta5_resp').show(); } else {$('#pregunta5_resp').hide(); $('#Sig2').prop('disabled', true); } });
+  $('input:radio[name=pregunta6]').click(function () {var resp6=$(this).val(); $('#Sig2').prop('disabled', false); if (resp6==1) {$('#pregunta6_resp').show(); } else {$('#pregunta6_resp').hide(); $('#Sig2').prop('disabled', true); } });
+  $('input:radio[name=pregunta7]').click(function () {var resp7=$(this).val(); $('#Sig2').prop('disabled', false); if (resp7==1) {$('#pregunta7_resp').show(); } else {$('#pregunta7_resp').hide(); $('#Sig2').prop('disabled', true);} });
+  $('input:radio[name=pregunta8]').click(function () {var resp8=$(this).val(); $('#Sig2').prop('disabled', false);if (resp8==1) {$('#pregunta8_resp').show(); } else {$('#pregunta8_resp').hide(); $('#Sig2').prop('disabled', true);} });
+  $('input:radio[name=pregunta9]').click(function () {var resp9=$(this).val(); $('#Sig2').prop('disabled', false); if (resp9==1) {$('#pregunta9_resp').show(); } else {$('#pregunta9_resp').hide(); $('#Sig2').prop('disabled', true); } });
+  $('input:radio[name=pregunta10]').click(function () {var resp10=$(this).val(); $('#Sig2').prop('disabled', false); if (resp10==1) {$('#pregunta10_resp').show(); } else {$('#pregunta10_resp').hide(); $('#Sig2').prop('disabled', true); } });
+  $('input:radio[name=pregunta11]').click(function () {var resp11=$(this).val();  $('#Sig2').prop('disabled', false); if (resp11==1) {$('#pregunta11_resp').show(); } else {$('#pregunta11_resp').hide(); $('#Sig2').prop('disabled', true); } });
+  $('input:radio[name=pregunta12]').click(function () {var resp12=$(this).val(); $('#Sig2').prop('disabled', false); if (resp12==1) {$('#pregunta12_resp').show(); } else {$('#pregunta12_resp').hide(); $('#Sig2').prop('disabled', true); } });
   $('input:radio[name=pregunta13]').click(function () {var resp13=$(this).val(); if (resp13==1) {$('#selpersonas').show(); } else {$('#selpersonas').hide(); } });
-  $('input:radio[name=pregunta14]').click(function () {var resp14=$(this).val(); if (resp14==1) {$('#pregunta15_resp').show();  } else {$('#pregunta16_resp').hide(); } });
-  $('input:radio[name=pregunta15]').click(function () {var resp15=$(this).val(); if (resp15==1) {$('#pregunta16_resp').show(); } else {$('#pregunta16_resp').hide(); } });
+  $('input:radio[name=pregunta14]').click(function () {var resp14=$(this).val(); $('#Sig2').prop('disabled', false); if (resp14==1) {$('#pregunta15_resp').show();  } else {$('#pregunta16_resp').hide(); $('#Sig2').prop('disabled', true); } });
+  $('input:radio[name=pregunta15]').click(function () {var resp15=$(this).val(); $('#Sig2').prop('disabled', false);if (resp15==1) {$('#pregunta16_resp').show(); } else {$('#pregunta16_resp').hide(); $('#Sig2').prop('disabled', true); } });
   
 
   $('input:radio[name=trabajo]').click(function () {
@@ -797,6 +807,7 @@ var p13 =$('input:radio[name=pregunta13]').click(function(event) {if ($(this).va
       $('#infopersonal').show();
       $('#preguntaprincipal').hide();
       $('#Sig2').show();
+      $('#Sig2').prop('disabled', true);
       $('#enviar1').hide();
       confirm('!Por favor realizar la siguiente encuesta¡')
   });

@@ -39,13 +39,18 @@ class factoresriesgosfechaExport implements FromCollection,ShouldQueue,Responsab
             //dd($this->fecha);
 
       return $index = \DB::table('encuesta')
-                ->join('empleados', 'empleados.id', '=', 'encuesta.empleados_id')
+         ->join('empleados', 'empleados.id', '=', 'encuesta.empleados_id')
+           ->where('encuesta.created_at','LIKE','%'.$this->fecha.'%')
+           ->where(function ($query) {
+               $query->where('pregunta1','=' ,'1')
+                     ->orWhere('pregunta2', '=', '1');
+           })
+            ->select('encuesta.*', 'empleados.CEDULA', 'empleados.NOMBRE', 'empleados.APELLIDO','empleados.EMPRESA','empleados.CARGO','empleados.DIRECCION','empleados.TELEFONO','empleados.CODCC','empleados.NOMBRECOSTOS','empleados.FECNAC','empleados.SEXO')
+           ->get();
                 
-                ->where('encuesta.created_at','LIKE','%'.$this->fecha.'%')
-                ->where('pregunta2','1' )
-                
-                ->select('encuesta.*', 'empleados.CEDULA', 'empleados.NOMBRE', 'empleados.APELLIDO','empleados.EMPRESA','empleados.CARGO','empleados.DIRECCION','empleados.TELEFONO','empleados.CODCC','empleados.NOMBRECOSTOS','empleados.FECNAC','empleados.SEXO')
-                ->get();              
+            
+
+              
         		
 
         

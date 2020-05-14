@@ -20,7 +20,7 @@
             <thead>
               <tr>
                 <th>Reportes en Excel</th>
-                <th>Consultas por Fecha <code>En Desarrollo</code></th>
+                <th>Consultas por Fecha</th>
               </tr>
             </thead>
             <tbody>
@@ -150,6 +150,16 @@
               <path fill-rule="evenodd" d="M13 6H3V5h10v1zm0 3H3V8h10v1zm0 3H3v-1h10v1z" clip-rule="evenodd"/>
               <path fill-rule="evenodd" d="M5 14V6h1v8H5zm4 0V6h1v8H9z" clip-rule="evenodd"/>
             </svg> Excel Total de Trabajadores</a></li>
+              </td>
+
+                          <tr>
+              <td>
+                
+                     <li class="list-group-item"><a href="{{ url('/terceros/export')}}"><svg class="bi bi-file-spreadsheet" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+              <path fill-rule="evenodd" d="M4 1h8a2 2 0 012 2v10a2 2 0 01-2 2H4a2 2 0 01-2-2V3a2 2 0 012-2zm0 1a1 1 0 00-1 1v10a1 1 0 001 1h8a1 1 0 001-1V3a1 1 0 00-1-1H4z" clip-rule="evenodd"/>
+              <path fill-rule="evenodd" d="M13 6H3V5h10v1zm0 3H3V8h10v1zm0 3H3v-1h10v1z" clip-rule="evenodd"/>
+              <path fill-rule="evenodd" d="M5 14V6h1v8H5zm4 0V6h1v8H9z" clip-rule="evenodd"/>
+            </svg> Excel Total de Terceros</a></li>
               </td>
               <td>
            {{--      
@@ -326,7 +336,7 @@
     <p>
 
     <div class="card">
-        <div class="card-header">Listado de Empleados con Sintomas Covid</div>
+        <div class="card-header">Listado de Empleados con Sintomas Covid ({{$hoy}})</div>
 
         <div class="card-body">
 
@@ -335,6 +345,7 @@
         $index = \DB::table('encuesta')
             ->join('empleados', 'empleados.id', '=', 'encuesta.empleados_id')
                 ->where('Covid19','Si' )
+                ->where('encuesta.created_at','LIKE','%'.$hoy.'%')
                 ->select('empleados.CEDULA', 'empleados.NOMBRE', 'empleados.APELLIDO','empleados.EMPRESA','empleados.CARGO','empleados.DIRECCION','empleados.TELEFONO','empleados.CODCC','empleados.NOMBRECOSTOS','empleados.FECNAC','empleados.SEXO')
             ->get();
 
@@ -359,7 +370,7 @@
 
     <p/>
        <div class="card">
-        <div class="card-header">Listado de Empleados con Factores de Riesgo</div>
+        <div class="card-header">Listado de Empleados con Factores de Riesgo ({{$hoy}})</div>
 
         <div class="card-body">
 
@@ -367,9 +378,9 @@
 
         $index = \DB::table('encuesta')
             ->join('empleados', 'empleados.id', '=', 'encuesta.empleados_id')
-                ->orWhere('pregunta1','1' )
-                ->orWhere('pregunta1','1' )
-                ->orWhere('pregunta13','1' )
+                ->where('encuesta.created_at','LIKE','%'.$hoy.'%')
+                ->Where('pregunta1','1' )
+                
                 ->select('empleados.CEDULA', 'empleados.NOMBRE', 'empleados.APELLIDO','empleados.EMPRESA','empleados.CARGO','empleados.DIRECCION','empleados.TELEFONO','empleados.CODCC','empleados.NOMBRECOSTOS','empleados.FECNAC','empleados.SEXO')
             ->get();
 

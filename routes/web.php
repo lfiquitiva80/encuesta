@@ -64,6 +64,7 @@ Route::resource('/encuesta', 'EncuestaController');
 Route::get('/tipotrabajo', 'EncuestaController@tipotrabajo')->name('tipotrabajo');
 
 Route::get('encuestas/export/', 'excelController@encuestas');
+Route::get('terceros/export/', 'excelController@terceros');
 Route::get('trabajadores/export/', 'excelController@empleados');
 Route::get('consintomas/export/', 'excelController@consintomas');
 Route::get('sinsintomas/export/', 'excelController@sinsintomas');

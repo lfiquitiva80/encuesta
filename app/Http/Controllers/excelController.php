@@ -13,6 +13,8 @@ use App\Exports\conCovidExport;
 use App\Exports\faltanReportarfechaExport;
 use App\Exports\consultaencuestaExport;
 use App\Exports\faltanReportarExport;
+use App\Exports\tercerosExport;
+use App\Exports\confactoresriesgosExport;
 use App\Exports\factoresriesgosfechaExport;
 use Maatwebsite\Excel\Facades\Excel;
 
@@ -105,6 +107,15 @@ class excelController extends Controller
 
       return new factoresriesgosfechaExport($request->fecha);
     }
+
+
+      public function terceros(tercerosExport $tercerosExport)
+    {
+      return $tercerosExport;
+    }
+
+
+
 
 
 }

@@ -26,6 +26,8 @@ class HomeController extends Controller
          $query = \DB::select('SELECT  
 DATE_FORMAT(ENC.created_at, "%Y-%m-%d")AS fecha,COUNT(*) AS CONTAR, (SELECT COUNT(*) FROM empleados WHERE DILIGENCIAR=1) AS EMPRESA FROM encuesta ENC
 INNER JOIN empleados EMP ON EMP.ID = ENC.empleados_id
+WHERE EMP.Diligenciar = 1
+
 GROUP BY FECHA;');  
         
 
