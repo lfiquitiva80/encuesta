@@ -134,7 +134,7 @@
               </td>
               <td>
                 
-                                                       {!! Form::open(['route' => 'factoresriesgosFecha', 'method'=>'GET', 'Class'=>'form-inline']) !!}
+            {!! Form::open(['route' => 'factoresriesgosFecha', 'method'=>'GET', 'Class'=>'form-inline']) !!}
             {!! Form::date('fecha', \Illuminate\Support\Carbon::now(), ['class' => 'form-control','name'=>'fecha','required']) !!}
         <button type="submit" class="btn btn-success"><i class="fa fa-file-excel-o" aria-hidden="true"></i> Consultar</button>
         {!! Form::close() !!}
@@ -267,9 +267,9 @@
               <div class="inner">
                 <h3>@php
                  $hoy=\Carbon\Carbon::now()->format('Y-m-d'); 
-                 $sintomas = \App\encuesta::where('Covid19','Si' )->count(); echo $sintomas; @endphp</h3>
+                 $sintomas = \App\encuesta::where('Covid19','Si' )->where('encuesta.created_at','LIKE','%'.$hoy.'%')->count(); echo $sintomas; @endphp</h3>
 
-                <p>¿Sintomas de Covid19?</p>
+                <p>¿Sintomas de Covid19 hoy {{$hoy}}?</p>
               </div>
               <div class="icon">
                 <i class="ion ion-bag"></i>
@@ -390,6 +390,44 @@
         
         <lu>
           <li>{{$row->CEDULA}} || {{$row->NOMBRE}} || {{$row->APELLIDO}} || {{$row->CARGO}}</li>
+        </lu>
+        
+
+        @endforeach
+      
+    
+
+          <!-- ./col -->
+        </div>
+
+
+    </div>
+
+    <p/>
+       <div class="card">
+        <div class="card-header">Listado de Empleados con Sintomas Covid <code>Acumulado</code></div>
+
+        <div class="card-body">
+
+        @php  
+
+  $index = \DB::table('encuesta')
+            ->join('empleados', 'empleados.id', '=', 'encuesta.empleados_id')
+                ->where('Covid19','Si' )
+                ->select('empleados.CEDULA', 'empleados.NOMBRE', 'empleados.APELLIDO', \DB::raw('count(*) as Acumulado'))
+                  ->groupBy('empleados.CEDULA', 'empleados.NOMBRE', 'empleados.APELLIDO')
+            ->get();
+
+        @endphp
+
+        @foreach ($index as $row)
+        
+        <lu>
+          <li>{{$row->CEDULA}} || {{$row->NOMBRE}}  {{$row->APELLIDO}} || 
+
+<button class="btn btn-warning" type="button">
+  Reportado: <span class="badge">({{$row->Acumulado}})</span>
+</button></li>
         </lu>
         
 
